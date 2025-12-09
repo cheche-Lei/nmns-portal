@@ -1,1 +1,0 @@
-let now: Date = new Date();

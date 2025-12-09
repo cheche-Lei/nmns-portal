@@ -25,9 +25,6 @@ app.use(express.static(path.join(process.cwd(), "public")));
 app.use(express.json());
 // 解析 URL-encoded body 的中間件
 app.use(express.urlencoded({ extended: true }));
-// 11/11若晴新增 會員頭像圖庫
-app.use("/avatars", express.static(path.join(process.cwd(), "public/avatars")));
-app.use('/planner/cover', express.static(path.join(process.cwd(), 'public/planner/cover')));
 // 允許所有來源訪問
 app.use(
   cors({
@@ -47,23 +44,12 @@ app.use(
   })
 );
 
-// console.log("cwd =", process.cwd());
-
-app.set("json replacer", (_key: any, value: { toString: () => any }) =>
-  typeof value === "bigint" ? value.toString() : value
-);
-
 // - - - 路由區 - - -
 
 // 網站根目錄⾴⾯
 app.get("/", (req: Request, res: Response) => {
   res.send("歡迎來到 Express + TS !");
 });
-
-// //若晴測試中
-// // 登入／註冊／驗證 路由
-// app.use("/api/auth", authRoutes);
-// app.use("/api/member", memberRoutes);
 
 // 測試 Prisma 與 Create
 app.use("/api", apiRouter);
