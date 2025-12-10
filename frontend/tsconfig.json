@@ -29,7 +29,6 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    ".next/types/**/*.ts",
     "app/travel-planner/components/tripItemCard.tsx_"
   ],
   "exclude": ["node_modules"]
