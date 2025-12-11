@@ -17,12 +17,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="zh-Hant">
       <body>
         <div className="flex min-h-screen flex-col">
-          <header className="bg-primary-gradient">
+          <header className="fixed top-0 left-0 w-full bg-primary-gradient z-header">
             <Container>
               <Header />
             </Container>
           </header>
-          <main>
+          <main className="mt-18 md:mt-25">
             <Container>{children}</Container>
           </main>
         </div>

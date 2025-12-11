@@ -2,6 +2,10 @@
 @import "tailwindcss";
 
 @theme {
+  /* =======================
+   Colors 顏色
+   ======================= */
+
   /* Primary (Green 主綠色) */
   --color-primary-dark: #0c342c;
   --color-primary: #076653;
@@ -26,7 +30,10 @@
   --color-logo-top: #009d85;
   --color-logo-bottom: #005bac;
 
-  /* Gradient */
+  /* =======================
+   Gradient 漸層
+   ======================= */
+
   /* 主視覺漸層 */
   --gradient-primary: linear-gradient(
     to right,
@@ -43,6 +50,53 @@
     var(--color-logo-bottom) 90%,
     var(--color-logo-bottom) 100%
   );
+
+  /* =======================
+   z-index 階層
+   ======================= */
+
+  /* -----------------------
+   Base（基礎內容）
+   ----------------------- */
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-header: 20;
+
+  /* -----------------------
+   Floating UI（一般頁面的）
+   ----------------------- */
+  --z-dropdown: 30;
+  --z-popover: 40;
+  --z-drawer: 50;
+
+  /* -----------------------
+   Modal 第一層
+   ----------------------- */
+  --z-modal-backdrop: 60;
+  --z-modal: 70;
+  --z-modal-floating: 75;
+
+  /* -----------------------
+   Modal 第二層（備用）
+   ----------------------- */
+  --z-modal2-backdrop: 80;
+  --z-modal2: 90;
+  --z-modal2-floating: 95;
+
+  /* -----------------------
+   Alert / Confirm Dialog
+   （例如「確認是否關閉視窗？」）
+   ----------------------- */
+  --z-alert-backdrop: 110;
+  --z-alert: 120;
+  --z-alert-floating: 125;
+
+  /* -----------------------
+   Toast / Fullscreen / 系統層
+   ----------------------- */
+  --z-toast: 200;
+  --z-fullscreen: 300;
+  --z-system: 9999;
 }
 
 @utility bg-primary-gradient {

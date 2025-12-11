@@ -1,8 +1,10 @@
 'use client';
 
-import * as Collapsible from '@radix-ui/react-collapsible';
-import { Menu } from 'lucide-react';
+import * as Dialog from '@radix-ui/react-dialog';
+import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
+import Container from './Container';
 
 // export interface HeaderProps {
 // }
@@ -10,6 +12,7 @@ import { useState } from 'react';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <>
       <div className="flex justify-between items-center">
@@ -27,11 +30,36 @@ export default function Header() {
             </h2>
           </div>
         </div>
-        <Menu className="text-xl text-white" />
-        <Collapsible.Root>
-          <Collapsible.Trigger />
-          <Collapsible.Content />
-        </Collapsible.Root>
+        {/* 漢堡按鈕 */}
+        <Dialog.Root open={menuOpen} onOpenChange={setMenuOpen}>
+          <Dialog.Trigger asChild>
+            <button className="IconButton">
+              {menuOpen ? (
+                <X className="text-xl text-white" />
+              ) : (
+                <Menu className="text-xl text-white" />
+              )}
+            </button>
+          </Dialog.Trigger>
+
+          {/* 漢堡選單內容 */}
+          <Dialog.Content className="absolute left-0 top-18 md:top-25 w-full bg-neutral-light z-dropdown text-lg">
+            <Container>
+              <Dialog.Title className="hidden">導覽選單</Dialog.Title>
+              <div className="flex flex-col mt-2">
+                <Link href="/exhibitions" onClick={() => setMenuOpen(false)}>
+                  展覽與劇場
+                </Link>
+                <Link href="/visit" onClick={() => setMenuOpen(false)}>
+                  參觀資訊
+                </Link>
+                <Link href="/about" onClick={() => setMenuOpen(false)}>
+                  關於博物館
+                </Link>
+              </div>
+            </Container>
+          </Dialog.Content>
+        </Dialog.Root>
       </div>
     </>
   );
