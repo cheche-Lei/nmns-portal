@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="zh-Hant">
       <body>
         <div className="flex min-h-screen flex-col">
-          <header>
+          <header className="bg-primary-gradient">
             <Container>
               <Header />
             </Container>
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Container>{children}</Container>
           </main>
         </div>
-        <footer>
+        <footer className="bg-primary-gradient">
           <Container>
             <Footer />
           </Container>
