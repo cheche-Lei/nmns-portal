@@ -30,7 +30,7 @@ export default function Header() {
             </h2>
           </div>
         </div>
-        {/* 漢堡按鈕 */}
+        {/* 手機版漢堡按鈕 */}
         <Dialog.Root open={menuOpen} onOpenChange={setMenuOpen}>
           <Dialog.Trigger asChild>
             <button className="IconButton">
@@ -43,20 +43,47 @@ export default function Header() {
           </Dialog.Trigger>
 
           {/* 漢堡選單內容 */}
-          <Dialog.Content className="absolute left-0 top-18 md:top-25 w-full bg-neutral-light z-dropdown text-lg">
+          <Dialog.Content className="absolute left-0 top-18 md:top-25 w-full bg-neutral-gradient z-dropdown text-lg">
             <Container>
               <Dialog.Title className="hidden">導覽選單</Dialog.Title>
-              <div className="flex flex-col mt-2">
+              {/* <div className="flex flex-col mb-6">
                 <Link href="/exhibitions" onClick={() => setMenuOpen(false)}>
-                  展覽與劇場
+                  <div className="py-3 border-b border-black">展覽與劇場</div>
                 </Link>
                 <Link href="/visit" onClick={() => setMenuOpen(false)}>
-                  參觀資訊
+                  <div className="py-3 border-b border-black">參觀資訊</div>
                 </Link>
                 <Link href="/about" onClick={() => setMenuOpen(false)}>
-                  關於博物館
+                  <div className="py-3 border-b border-black">關於博物館</div>
+                </Link>
+              </div> */}
+              {/* <Link href="/about" onClick={() => setMenuOpen(false)}>
+                <div className="py-3 border border-black text-center mb-3">
+                  會員中心
+                </div>
+              </Link> */}
+              <div className="flex flex-col mb-6 gap-2">
+                <Link href="/exhibitions" onClick={() => setMenuOpen(false)}>
+                  <div className="p-3 bg-glassmorphism rounded-lg">
+                    展覽與劇場
+                  </div>
+                </Link>
+                <Link href="/visit" onClick={() => setMenuOpen(false)}>
+                  <div className="p-3 bg-glassmorphism rounded-lg">
+                    參觀資訊
+                  </div>
+                </Link>
+                <Link href="/about" onClick={() => setMenuOpen(false)}>
+                  <div className="p-3 bg-glassmorphism rounded-lg">
+                    關於博物館
+                  </div>
                 </Link>
               </div>
+              <Link href="/about" onClick={() => setMenuOpen(false)}>
+                <div className="py-3 bg-glassmorphism text-center rounded-lg">
+                  會員中心
+                </div>
+              </Link>
             </Container>
           </Dialog.Content>
         </Dialog.Root>
