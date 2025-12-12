@@ -1,9 +1,12 @@
 'use client';
 
+import * as Accordion from '@radix-ui/react-accordion';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import navData from '../../src/data/nav';
 import Container from './Container';
 
 // export interface HeaderProps {
@@ -11,7 +14,14 @@ import Container from './Container';
 // {  }: HeaderProps
 
 export default function Header() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // 功能：先跳轉頁面，再關閉選單
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   return (
     <>
@@ -41,46 +51,55 @@ export default function Header() {
               )}
             </button>
           </Dialog.Trigger>
-
+          <Dialog.Overlay className="fixed inset-0" />
           {/* 漢堡選單內容 */}
-          <Dialog.Content className="absolute left-0 top-18 md:top-25 w-full bg-neutral-gradient z-dropdown text-lg">
+          <Dialog.Content className="absolute left-0 top-18 md:top-25 w-full max-h-125 overflow-y-auto bg-neutral-gradient z-dropdown text-lg">
             <Container>
               <Dialog.Title className="hidden">導覽選單</Dialog.Title>
-              {/* <div className="flex flex-col mb-6">
-                <Link href="/exhibitions" onClick={() => setMenuOpen(false)}>
-                  <div className="py-3 border-b border-black">展覽與劇場</div>
-                </Link>
-                <Link href="/visit" onClick={() => setMenuOpen(false)}>
-                  <div className="py-3 border-b border-black">參觀資訊</div>
-                </Link>
-                <Link href="/about" onClick={() => setMenuOpen(false)}>
-                  <div className="py-3 border-b border-black">關於博物館</div>
-                </Link>
-              </div> */}
-              {/* <Link href="/about" onClick={() => setMenuOpen(false)}>
-                <div className="py-3 border border-black text-center mb-3">
-                  會員中心
-                </div>
-              </Link> */}
-              <div className="flex flex-col mb-6 gap-2">
-                <Link href="/exhibitions" onClick={() => setMenuOpen(false)}>
-                  <div className="p-3 bg-glassmorphism rounded-lg">
-                    展覽與劇場
-                  </div>
-                </Link>
-                <Link href="/visit" onClick={() => setMenuOpen(false)}>
-                  <div className="p-3 bg-glassmorphism rounded-lg">
-                    參觀資訊
-                  </div>
-                </Link>
-                <Link href="/about" onClick={() => setMenuOpen(false)}>
-                  <div className="p-3 bg-glassmorphism rounded-lg">
-                    關於博物館
-                  </div>
-                </Link>
-              </div>
-              <Link href="/about" onClick={() => setMenuOpen(false)}>
-                <div className="py-3 bg-glassmorphism text-center rounded-lg">
+              <Accordion.Root
+                type="single"
+                // defaultValue="item-1"
+                collapsible
+                className="flex flex-col gap-2"
+              >
+                {navData.map((item, index) => (
+                  <Accordion.Item
+                    key={index}
+                    value={`item-${index + 1}`}
+                    className="bg-glassmorphism rounded-lg"
+                  >
+                    <Accordion.Header>
+                      <Accordion.Trigger className="accordion-trigger flex justify-between items-center w-full p-3 text-left">
+                        {item.title}
+                        <ChevronDown className="accordion-chevron w-4 h-4 transition-transform duration-200" />
+                      </Accordion.Trigger>
+                    </Accordion.Header>
+
+                    <Accordion.Content className="flex flex-col gap-1 mb-2">
+                      {item.children.map((child, idx) => (
+                        <Link
+                          key={idx}
+                          href={child.href}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          <div className="px-6 py-3 rounded-lg">
+                            {child.title}
+                          </div>
+                        </Link>
+                      ))}
+                    </Accordion.Content>
+                  </Accordion.Item>
+                ))}
+              </Accordion.Root>
+
+              <Link
+                href="/member"
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push('/member');
+                }}
+              >
+                <div className="py-3 bg-glassmorphism text-center rounded-lg mt-4">
                   會員中心
                 </div>
               </Link>
