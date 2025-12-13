@@ -51,7 +51,7 @@ export default function Header() {
               )}
             </button>
           </Dialog.Trigger>
-          <Dialog.Overlay className="fixed inset-0" />
+          <Dialog.Overlay className="fixed inset-0 mt-18 md:mt-25 bg-black/50" />
           {/* 漢堡選單內容 */}
           <Dialog.Content className="absolute left-0 top-18 md:top-25 w-full max-h-125 overflow-y-auto bg-neutral-gradient z-dropdown text-lg">
             <Container>
@@ -80,7 +80,10 @@ export default function Header() {
                         <Link
                           key={idx}
                           href={child.href}
-                          onClick={() => setMenuOpen(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            router.push(child.href);
+                          }}
                         >
                           <div className="px-6 py-3 rounded-lg">
                             {child.title}

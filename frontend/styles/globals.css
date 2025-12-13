@@ -49,6 +49,14 @@
     var(--color-neutral-verylight) 100%
   );
 
+  /* 深色漸層 */
+  --gradient-dark-green: linear-gradient(
+    to right,
+    var(--color-accent-dark) 0%,
+    var(--color-primary-dark) 50%,
+    var(--color-primary) 100%
+  );
+
   /* LOGO 色塊 */
   --gradient-logo: linear-gradient(
     to bottom,
@@ -114,13 +122,17 @@
   background-image: var(--gradient-neutral);
 }
 
+@utility bg-dark-green-gradient {
+  background-image: var(--gradient-dark-green);
+}
+
 @utility bg-logo {
   background-image: var(--gradient-logo);
 }
 
 @utility bg-glassmorphism {
   background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(3px);
+  /* backdrop-filter: blur(3px); */
 
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
 
@@ -131,7 +143,7 @@
   /* --- Hover（桌機）--- */
   &:hover {
     background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(4px);
+    /* backdrop-filter: blur(4px); */
 
     box-shadow: 0 30px 55px rgba(0, 0, 0, 0.15);
 
@@ -143,7 +155,7 @@
   /* --- Active（手機+桌機按下）--- */
   &:active {
     background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
 
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
 
@@ -154,12 +166,3 @@
     /* transform: scale(0.97); 讓手感更好 */
   }
 }
-
-/* styles.css */
-/* .accordion-chevron {
-  transition: transform 0.2s ease;
-}
-
-.accordion-trigger[data-state="open"] .accordion-chevron {
-  transform: rotate(180deg);
-} */
